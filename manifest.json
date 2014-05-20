@@ -1,0 +1,14 @@
+{
+  "name": "TodoMVC",
+  "manifest_version": 2,
+  "description": "Turning TodoMVC into a Chrome extension.",
+  "version": "1.0",
+
+  "chrome_url_overrides": {
+      "newtab": "newtab.html"
+  },
+
+  "permissions": [
+    "storage"
+  ]
+}
