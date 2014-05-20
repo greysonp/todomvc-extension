@@ -9,7 +9,17 @@ angular.module('todomvc')
 	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, todoStorage) {
 		'use strict';
 
-		var todos = $scope.todos = todoStorage.get();
+		// Initialize the todos to something, since we are now grabbing them asynchronously
+		// from Chrome storage.
+		var todos = $scope.todos = [];
+
+		// Retrieve the stored data from Chrome storage
+		todoStorage.get(function(data) {
+			todos = $scope.todos = data;
+			// Normally Angular will watch for changes, but this change we just peformed won't be
+			// picked up by $watch. We have to manually tell Angular that we updated todos.
+			$scope.$apply();
+		});
 
 		$scope.newTodo = '';
 		$scope.editedTodo = null;
